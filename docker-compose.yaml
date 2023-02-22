@@ -1,0 +1,97 @@
+version: '3.9'
+services:
+
+  db:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: qwerty123456
+    ports:
+      - '27017:27017'
+    volumes:
+      - db:/data/db
+    networks:
+      - db
+
+  app_1:
+    build: .
+    env_file:
+      - .env
+      # environment:
+      #   PORT: 3000
+      #   MONGO_URL: mongodb://root:qwerty123456@db:27017/job?authSource=admin
+    networks:
+      - db
+      - proxy
+    depends_on:
+      - db
+    ports:
+      - '3000:3000'
+
+  app_2:
+    build: .
+    env_file:
+      - .env
+    networks:
+      - db
+      - proxy
+    depends_on:
+      - db
+
+  app_3:
+    build: .
+    env_file:
+      - .env
+    networks:
+      - db
+      - proxy
+    depends_on:
+      - db
+
+  app_4:
+    build: .
+    env_file:
+      - .env
+    networks:
+      - db
+      - proxy
+    depends_on:
+      - db
+
+  proxy:
+    build: ./proxy
+    networks:
+      - proxy
+    ports:
+      - '8080:80'
+    depends_on:
+      - app_1
+      - app_2
+      - app_3
+      - app_4
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./portainer-data:/data
+    ports:
+      - 9000:9000
+
+volumes:
+  db:
+    driver: local
+  portainer-data:
+
+
+networks:
+  db:
+    driver: bridge
+  proxy:
+    driver: bridge
