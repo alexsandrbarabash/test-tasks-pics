@@ -13,7 +13,7 @@ services:
       - db:/data/db
     networks:
       - db
-    command: mongosh -u root -p qwerty123456 --authenticationDatabase admin
+    # command: mongosh -u root -p qwerty123456 --authenticationDatabase admin
 
   app_1:
     build: .
