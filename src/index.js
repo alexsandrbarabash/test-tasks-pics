@@ -35,7 +35,7 @@ app.post('/templates/:templateId/job', async (req, res) => {
   }
 });
 
-app.get('/', (_, res) => {
+app.get('/health', (_, res) => {
   res.json({ cpus: os.cpus(), totalmem: os.totalmem(), freemem: os.freemem() });
 });
 
@@ -50,7 +50,9 @@ app.get('/rss', async (_, res) => {
   res.send(feed.xml());
 });
 
-app.listen(process.env.PORT, async () => {
+const port = process.env.PORT;
+
+app.listen(port, async () => {
   await mongoose.connect(process.env.MONGO_URL);
   console.log(`Server start at ${port}`);
 });
