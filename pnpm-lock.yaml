@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  dotenv: ^16.0.3
   eslint: ^8.34.0
   eslint-config-airbnb-base: 15.0.0
   eslint-config-prettier: 8.6.0
@@ -13,6 +14,7 @@ specifiers:
   rss: ^1.2.2
 
 dependencies:
+  dotenv: 16.0.3
   express: 4.18.2
   mongoose: 6.9.2
   rss: 1.2.2
@@ -1202,6 +1204,11 @@ packages:
     dependencies:
       esutils: 2.0.3
     dev: true
+
+  /dotenv/16.0.3:
+    resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
+    engines: {node: '>=12'}
+    dev: false
 
   /ee-first/1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}

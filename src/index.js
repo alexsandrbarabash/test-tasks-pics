@@ -6,10 +6,12 @@ const RSS = require('rss');
 const jobService = require('./job-service.service');
 const { Job } = require('./schemas');
 
+require('dotenv').config();
+
 const feed = new RSS({ title: 'Job' });
 
 const app = express();
-const port = 3000;
+// const port = 3000;
 
 app.use(express.json());
 
@@ -48,10 +50,7 @@ app.get('/rss', async (_, res) => {
   res.send(feed.xml());
 });
 
-app.listen(port, async () => {
-  await mongoose.connect(
-    // 'mongodb://root:example@127.0.0.1:27017/job?authSource=admin',
-    'mongodb://root:example@db:27017/job?authSource=admin',
-  );
+app.listen(process.env.PORT, async () => {
+  await mongoose.connect(process.env.MONGO_URL);
   console.log(`Server start at ${port}`);
 });
