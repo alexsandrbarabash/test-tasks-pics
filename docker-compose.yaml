@@ -13,6 +13,7 @@ services:
       - db:/data/db
     networks:
       - db
+    command: mongo -u root -p qwerty123456 --authenticationDatabase admin
 
   app_1:
     build: .
